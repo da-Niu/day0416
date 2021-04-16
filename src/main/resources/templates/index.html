@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="page">
+        主题：<input type="text" v-model="email.head"><br>
+        内容：<textarea v-model="email.text"></textarea><br>
+        收件人:<input type="email" v-model="email.uurl">
+        <button @click="send">发送</button>
+    </div>
+</body>
+<script src="../vuejs/vuejs-2.5.16.js"></script>
+<script src="../vuejs/axios-0.18.0.js"></script>
+<script>
+    new Vue({
+        el:"#page",
+        data:{
+            email:{}
+        },
+        methods:{
+            send:function () {
+                var _this = this
+                axios.post("/TestController/sendEmail",_this.email).then(function (response) {
+                    alert(response.data)
+                })
+            }
+        }
+    })
+</script>
+</html>
